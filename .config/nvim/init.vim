@@ -84,7 +84,7 @@ NeoBundle 'groenewege/vim-less'
 
 NeoBundle 'lambdatoast/elm.vim'
 NeoBundle 'neomake/neomake'
-NeoBundle 'benjie/local-npm-bin.vim'
+"NeoBundle 'benjie/local-npm-bin.vim'
 
 "NeoBundle 'benjie/neomake-local-eslint.vim'
 "NeoBundle 'dmitry/vim-react-es6-snippets'
@@ -272,7 +272,7 @@ xnoremap <leader>G :call GitGrepVisuallySelectedText()<CR>
 set suffixesadd=.es,.js,.jsx,.elm
 
 " Run NeoMake on read and write operations
-autocmd! BufReadPost,BufWritePost * Neomake
+ autocmd! BufReadPost,BufWritePost * Neomake
 
 " Disable inherited syntastic
 let g:syntastic_mode_map = {
@@ -280,12 +280,12 @@ let g:syntastic_mode_map = {
   \ "active_filetypes": [],
   \ "passive_filetypes": [] }
 
-"if findfile('.eslintrc', '.;') !=# ''
+if findfile('node_modules/.bin/eslint', '.;') !=# ''
   let g:syntastic_javascript_checkers = ['eslint']
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_jsx_enabled_makers = ['eslint']
   let b:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-"endif
+endif
 
 
 let g:neomake_serialize = 1
