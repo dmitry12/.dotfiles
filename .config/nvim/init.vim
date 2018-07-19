@@ -82,7 +82,7 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'groenewege/vim-less'
 
-NeoBundle 'lambdatoast/elm.vim'
+"NeoBundle 'lambdatoast/elm.vim'
 NeoBundle 'neomake/neomake'
 "NeoBundle 'benjie/local-npm-bin.vim'
 
@@ -104,6 +104,7 @@ NeoBundle 'flowtype/vim-flow', {
 NeoBundle 'sodapopcan/vim-twiggy'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'danreeves/vim-flow-plus'
+NeoBundle 'elmcast/elm-vim'
 
 call neobundle#end()
 filetype plugin indent on
@@ -151,10 +152,6 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>pr :TagbarToggle<CR>
 nnoremap <leader>c :let @/ = ''<CR>
-
-"nnoremap <leader><leader> :call fzf#run({ 'source': 'find . \( -name "*.tmp.js" -o -path ./node_modules -o -path ./.git -o -path ./library/vendor -o -path ./coverage -o -path ./vendor -o -path ./public-src/skyfish/react/components/Reuse/node_modules -o -path ./private/node_modules -o -path ./public/js/bower_components -o -path ./bower_components -o -path ./public \) -prune -o -print', 'sink': 'e', 'window': 'rightbelow new', 'down': 20  })<CR>
-"
-"nnoremap <leader>pp :call fzf#run({ 'source': 'find . \( -name "*.tmp.js" -o -path ./node_modules -o -path ./.git -o -path ./library/vendor -o -path ./coverage -o -path ./vendor -o -path ./public-src/skyfish/react/components/Reuse/node_modules -o -path ./private/node_modules -o -path ./public/js/bower_components -o -path ./bower_components \) -prune -o -print', 'sink': 'e' })<CR>
 
 nnoremap <leader><leader> :call fzf#run({ 'sink': 'e', 'window': 'rightbelow new' })<CR>
 
@@ -360,3 +357,5 @@ endfunction
 au BufNewFile,BufRead *.pn set filetype=potion
 
 set noshowmode
+
+let g:elm_format_autosave = 1
