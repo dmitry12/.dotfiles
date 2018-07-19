@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#	name = Dmitry Astapenko
+#	email = dmitry.astapenko@gmail.com
+[user]
+	name = Dmitry Astapenko
+	email = dmitry.astapenko@gmail.com
+[commit]
+	gpgsign = true
+[core]
+  # brew install diff-so-fancy
+	pager = diff-so-fancy | less --tabs=4 -RFX
