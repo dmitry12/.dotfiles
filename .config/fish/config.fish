@@ -13,3 +13,5 @@ abbr gco "git checkout"
 abbr gg "git grep"
 
 set -x FZF_DEFAULT_COMMAND 'ag -g ""'
+
+set fish_escape_delay_ms 300
