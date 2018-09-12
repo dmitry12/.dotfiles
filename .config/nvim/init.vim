@@ -36,7 +36,7 @@ syntax sync minlines=256
 set synmaxcol=2048
 
 set clipboard=unnamed,unnamedplus
-
+set noswapfile
 set mouse=""
 
 "NeoBundle Scripts-----------------------------
@@ -44,72 +44,44 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.config/nvim/bundle/'))
+call plug#begin('~/.vim/plugged')
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'neomake/neomake'
 
-NeoBundle 'scrooloose/syntastic'
+Plug 'dmitry12/heroku-colorscheme'
 
-NeoBundle 'dmitry12/heroku-colorscheme'
+Plug 'bolasblack/csslint.vim'
+Plug 'SirVer/ultisnips'
+Plug 'vim-scripts/CmdlineComplete'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-surround'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmhedberg/matchit'
 
-NeoBundle 'bolasblack/csslint.vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'vim-scripts/CmdlineComplete'
-NeoBundleLazy 'sjl/gundo.vim'
-NeoBundleLazy 'mru.vim'
-NeoBundleLazy 'Tagbar'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'fugitive.vim'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'Tabmerge'
-NeoBundle 'surround.vim'
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'junegunn/fzf'
-NeoBundle 'junegunn/fzf.vim'
-NeoBundle 'tmhedberg/matchit'
-NeoBundle 'benmills/vimux'
+Plug 'honza/vim-snippets'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 
-NeoBundle 'honza/vim-snippets'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/html5.vim'
+Plug 'airblade/vim-rooter'
+Plug 'groenewege/vim-less'
 
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'pangloss/vim-javascript'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'sbdchd/neoformat'
 
-NeoBundle 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-NeoBundle 'othree/html5.vim'
-NeoBundle 'airblade/vim-rooter'
-NeoBundle 'groenewege/vim-less'
+Plug 'itchyny/lightline.vim'
+Plug 'elmcast/elm-vim'
+Plug 'styled-components/vim-styled-components'
 
-"NeoBundle 'lambdatoast/elm.vim'
-NeoBundle 'neomake/neomake'
-"NeoBundle 'benjie/local-npm-bin.vim'
-
-"NeoBundle 'benjie/neomake-local-eslint.vim'
-"NeoBundle 'dmitry/vim-react-es6-snippets'
-NeoBundle 'dmitry12/vim-react-es6-snippets'
-NeoBundle 'Shougo/deoplete.nvim'
-NeoBundle 'carlitux/deoplete-ternjs', { 'build': { 'mac': 'npm install -g tern', 'unix': 'npm install -g tern' }}
-"NeoBundle 'wokalski/autocomplete-flow'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'sbdchd/neoformat'
-NeoBundle 'flowtype/vim-flow', {
-          \ 'autoload': {
-          \     'filetypes': 'javascript'
-          \ }}
-
-"NeoBundle 'paradigm/SkyBison'
-NeoBundle 'sodapopcan/vim-twiggy'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'danreeves/vim-flow-plus'
-NeoBundle 'elmcast/elm-vim'
-
-call neobundle#end()
-filetype plugin indent on
-
-NeoBundleCheck
+call plug#end()
 
 set background=dark
 
@@ -272,18 +244,16 @@ set suffixesadd=.es,.js,.jsx,.elm
  autocmd! BufReadPost,BufWritePost * Neomake
 
 " Disable inherited syntastic
-let g:syntastic_mode_map = {
-  \ "mode": "passive",
-  \ "active_filetypes": [],
-  \ "passive_filetypes": [] }
-
-if findfile('node_modules/.bin/eslint', '.;') !=# ''
-  let g:syntastic_javascript_checkers = ['eslint']
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  let g:neomake_jsx_enabled_makers = ['eslint']
-  let b:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-endif
-
+"let g:syntastic_mode_map = {
+"  \ "mode": "passive",
+"  \ "active_filetypes": [],
+"  \ "passive_filetypes": [] }
+"
+" if findfile('node_modules/.bin/eslint', '.;') !=# ''
+" "  let g:syntastic_javascript_checkers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+" endif
 
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
@@ -335,24 +305,24 @@ let g:twiggy_remote_branch_sort = 'date'
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'right': [ [ 'flow', 'hi' ] ]
+      \ 'inactive': {
+      \   'left': [ [ 'full_filename', 'readonly', 'modified' ] ],
       \ },
-      \ 'component_function': {
-      \   'flow': 'LightlineFlowCoverage',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'full_filename', 'readonly', 'modified' ] ],
+      \   'right': [ [ 'hi' ] ]
       \ },
       \ 'component': {
       \   'hi': 'hello',
-      \ }
+      \ },
+      \ 'component_function': {
+      \   'full_filename': 'GetFullFilename'
+      \ },
       \ }
 
-function! LightlineFlowCoverage()
-  if exists('b:flow_coverage_status')
-    return b:flow_coverage_status
-  endif
-  return ''
+function! GetFullFilename()
+  return expand('%')
 endfunction
-
 
 au BufNewFile,BufRead *.pn set filetype=potion
 

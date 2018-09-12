@@ -11,7 +11,12 @@ abbr gdc "git diff --cached"
 abbr ga "git add"
 abbr gco "git checkout"
 abbr gg "git grep"
+abbr grh "git reset HEAD"
 
 set -x FZF_DEFAULT_COMMAND 'ag -g ""'
 
 set fish_escape_delay_ms 300
+
+source ~/.config/fish/nvm-wrapper/nvm.fish
+
+fish_vi_key_bindings
